@@ -1,5 +1,7 @@
 # Etsy POD Forge
 
+[![Live App](https://img.shields.io/badge/Live_App-etsy--pod.nullai.tech-gold?style=flat-square)](https://etsy-pod.nullai.tech)
+[![Dual Rails](https://img.shields.io/badge/Dual_Checkout-Stripe_%2B_Solana-success?style=flat-square)](https://etsy-pod.nullai.tech)
 [![Zero Pip Bloat](https://img.shields.io/badge/dependencies-Pillow%20only-gold.svg)](pyproject.toml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)

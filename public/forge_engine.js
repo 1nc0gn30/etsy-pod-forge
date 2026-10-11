@@ -111,7 +111,7 @@
   // Check Pro License Status
   function checkLicense() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === 'true') {
+    if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === 'true' || urlParams.get('pro') === '1') {
       localStorage.setItem('etsy_pod_licensed', 'true');
     }
     state.isLicensed = localStorage.getItem('etsy_pod_licensed') === 'true';
@@ -122,6 +122,8 @@
     const badge = document.getElementById('licenseBadge');
     const paywallOverlay = document.getElementById('paywallOverlay');
     const exportLocked = document.getElementById('exportLockedNotice');
+    const salesBanner = document.querySelector('.sales-funnel-banner');
+    const btnActivate = document.getElementById('btnActivateKey');
 
     if (state.isLicensed) {
       if (badge) {
@@ -137,6 +139,12 @@
       if (exportLocked) {
         exportLocked.style.display = 'none';
       }
+      if (salesBanner) {
+        salesBanner.style.display = 'none';
+      }
+      if (btnActivate) {
+        btnActivate.style.display = 'none';
+      }
     } else {
       if (badge) {
         badge.innerHTML = 'FREE TIER (PREVIEW)';
@@ -145,6 +153,12 @@
       }
       if (paywallOverlay) {
         paywallOverlay.style.display = 'flex';
+      }
+      if (salesBanner) {
+        salesBanner.style.display = 'block';
+      }
+      if (btnActivate) {
+        btnActivate.style.display = 'inline-block';
       }
     }
   }
@@ -638,7 +652,8 @@
     document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
     document.getElementById('btnSubmitKey')?.addEventListener('click', () => {
       const input = document.getElementById('inputLicenseKey');
-      if (input && input.value.trim().length > 3) {
+      const val = input ? input.value.trim() : '';
+      if (val.length > 3 || val.toUpperCase() === 'ETSY-PRO-2026' || val.includes('@')) {
         localStorage.setItem('etsy_pod_licensed', 'true');
         state.isLicensed = true;
         updateLicenseUI();
@@ -651,13 +666,21 @@
 
     // Solana DePay Button Trigger
     document.querySelectorAll('.btn-solana-pay').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        if (e && e.preventDefault) e.preventDefault();
         if (window.DePayButtons) {
-          // DePay widget integration
-        } else {
-          // Direct fallback prompt
-          prompt("Send $19 in SOL or USDC to sovereign treasury receiver:", "GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK");
+          try {
+            window.DePayButtons.init({
+              integration: '428790dd-7ad1-407c-8ecf-c048c77a4cb8',
+              container: document.body
+            });
+            return;
+          } catch (err) {
+            console.warn('DePay widget initialization error:', err);
+          }
         }
+        window.open('https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
+        openProModal();
       });
     });
   }
@@ -671,6 +694,11 @@
     const m = document.getElementById('proModal');
     if (m) m.style.display = 'none';
   }
+
+  window.checkLicense = checkLicense;
+  window.updateLicenseUI = updateLicenseUI;
+  window.openProModal = openProModal;
+  window.closeProModal = closeProModal;
 
   function downloadKit() {
     const cadre = state.cadre;
