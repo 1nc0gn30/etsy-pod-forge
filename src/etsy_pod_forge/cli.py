@@ -29,6 +29,24 @@ from .mockup_engine import MockupEngine, MockupConfig
 from .prompt_vault import get_all_prompts, get_prompts_by_cadre, search_prompts
 from .server import ForgeServer
 
+
+def _default_bind_host() -> str:
+    """Bind address: localhost unless explicitly opted in via $ZOTH_BIND_HOST or
+    $HOST (IP literal only; zsh sets HOST to the hostname) or --host."""
+    import ipaddress, os
+    for var in ("ZOTH_BIND_HOST", "HOST"):
+        val = os.environ.get(var, "").strip()
+        if val == "localhost":
+            return "127.0.0.1"
+        if val:
+            try:
+                ipaddress.ip_address(val)
+                return val
+            except ValueError:
+                pass
+    return "127.0.0.1"
+
+
 # ANSI Color Commodity Tokens
 C_RESET = "\033[0m"
 C_BOLD = "\033[1m"
@@ -261,7 +279,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # Command: serve
     p_serve = subparsers.add_parser("serve", help="Start web cockpit & REST API daemon")
     p_serve.add_argument("--port", type=int, default=8107, help="Port to bind (default: 8107)")
-    p_serve.add_argument("--host", default="0.0.0.0", help="Host interface (default: 0.0.0.0)")
+    p_serve.add_argument("--host", default=_default_bind_host(), help="Host interface (default: 127.0.0.1 or $ZOTH_BIND_HOST; use 0.0.0.0 only on trusted networks)")
 
     # Command: status
     p_status = subparsers.add_parser("status", help="Check live daemon health and telemetry")

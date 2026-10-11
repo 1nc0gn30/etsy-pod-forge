@@ -437,7 +437,7 @@ class ForgeRequestHandler(SimpleHTTPRequestHandler):
 class ForgeServer:
     """Manages the lifecycle of the Etsy POD Forge HTTP server."""
 
-    def __init__(self, host: str = "0.0.0.0", port: int = 8107, public_dir: Optional[str] = None):
+    def __init__(self, host: str = "127.0.0.1", port: int = 8107, public_dir: Optional[str] = None):
         self.host = host
         self.port = port
         self.public_dir = public_dir
