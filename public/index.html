@@ -24,6 +24,7 @@
   <meta name="twitter:image" content="https://etsy-pod.nullai.tech/assets/banner.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" href="/assets/icon.png">
+  <link rel="apple-touch-icon" href="/assets/icon.png">
   <script src="https://integrate.depay.com/widgets/v13.js" defer></script>
 
   <!-- Typography -->
@@ -796,12 +797,14 @@
 
   <header>
     <div class="container header-inner">
-      <a href="/" class="brand-title" title="Etsy POD Forge Home">
+      <a href="/" class="brand-title" title="Etsy POD Forge Home" style="display:flex; align-items:center;">
+        <img src="/assets/icon.png" alt="Etsy POD Forge Icon" style="width:28px;height:28px;border-radius:6px;object-fit:cover;margin-right:8px;">
         <span class="floral-icon">🌸</span>
         <span>ETSY POD FORGE</span>
+        <span class="version-pill" style="font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:9999px;background:rgba(212,175,55,0.15);color:#d4af37;border:1px solid rgba(212,175,55,0.3);margin-left:8px;">v2.5 SOVEREIGN</span>
       </a>
       <div class="header-actions">
-        <div id="licenseBadge" class="brand-badge badge-guest">FREE TIER (PREVIEW)</div>
+        <div id="licenseBadge" class="brand-badge badge-guest">⚡ FREE TIER</div>
         <button id="btnActivateKey" class="btn-key-activate" type="button">Enter Key / Pro</button>
       </div>
     </div>
@@ -980,7 +983,7 @@
   </main>
 
   <!-- Pro Activation Modal -->
-  <div id="proModal" class="modal-overlay">
+  <div id="proModal" data-alias="licenseModal" class="modal-overlay">
     <div class="modal-card">
       <button id="closeModalBtn" type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
       <h3 style="font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 8px; color: var(--text-main);">
@@ -1004,8 +1007,8 @@
           Already purchased? Enter receipt email or license key:
         </label>
         <div style="display: flex; gap: 8px;">
-          <input type="text" id="inputLicenseKey" placeholder="e.g. neal@nealfrazier.tech or PRO-XXXX" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem;">
-          <button id="btnSubmitKey" type="button" style="background: var(--gold); border: none; color: #000; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: var(--font-mono);">Activate</button>
+          <input type="text" id="inputLicenseKey" placeholder="e.g. neal@nealfrazier.tech or ETSY-PRO-2026" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem;">
+          <button id="btnSubmitKey" data-alias="btnActivateKey" type="button" style="background: var(--gold); border: none; color: #000; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: var(--font-mono);">Activate</button>
         </div>
       </div>
     </div>

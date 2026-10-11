@@ -1,0 +1,13 @@
+{
+  "name": "etsy-pod-forge",
+  "version": "2.5.0",
+  "description": "Autonomous Print-on-Demand Studio & Etsy SEO Listing Synthesizer",
+  "main": "public/forge_engine.js",
+  "scripts": {
+    "serve": "npx serve public -l 8844",
+    "start": "python3 -m http.server 8107 --directory public",
+    "test": "pytest tests/"
+  },
+  "author": "Neal Frazier Tech (@1nc0gn30) • NullAI Platform",
+  "license": "MIT"
+}

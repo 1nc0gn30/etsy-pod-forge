@@ -108,13 +108,26 @@
     }
   };
 
+  // Pro License Storage Keys
+  const STORAGE_KEY = 'etsy_pod_licensed';
+  const STORAGE_KEY_ALT = 'zoth_etsy_pod_licensed';
+  const STORAGE_KEY_PRO = 'pro_licensed';
+
   // Check Pro License Status
   function checkLicense() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === 'true' || urlParams.get('pro') === '1') {
-      localStorage.setItem('etsy_pod_licensed', 'true');
+    if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === 'true' || urlParams.get('pro') === '1' || urlParams.get('key') === 'ETSY-PRO-2026') {
+      localStorage.setItem(STORAGE_KEY, 'true');
+      localStorage.setItem(STORAGE_KEY_ALT, 'true');
+      localStorage.setItem(STORAGE_KEY_PRO, 'true');
+      try {
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+      } catch (e) {}
     }
-    state.isLicensed = localStorage.getItem('etsy_pod_licensed') === 'true';
+    state.isLicensed = localStorage.getItem(STORAGE_KEY) === 'true' ||
+                       localStorage.getItem(STORAGE_KEY_ALT) === 'true' ||
+                       localStorage.getItem(STORAGE_KEY_PRO) === 'true';
     updateLicenseUI();
   }
 
@@ -147,7 +160,7 @@
       }
     } else {
       if (badge) {
-        badge.innerHTML = 'FREE TIER (PREVIEW)';
+        badge.innerHTML = '⚡ FREE TIER';
         badge.classList.add('badge-guest');
         badge.classList.remove('badge-pro');
       }
@@ -651,17 +664,7 @@
     document.getElementById('btnActivateKey')?.addEventListener('click', openProModal);
     document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
     document.getElementById('btnSubmitKey')?.addEventListener('click', () => {
-      const input = document.getElementById('inputLicenseKey');
-      const val = input ? input.value.trim() : '';
-      if (val.length > 3 || val.toUpperCase() === 'ETSY-PRO-2026' || val.includes('@')) {
-        localStorage.setItem('etsy_pod_licensed', 'true');
-        state.isLicensed = true;
-        updateLicenseUI();
-        closeProModal();
-        showToast('⭐ PRO LICENSE ACTIVATED PERMANENTLY!');
-      } else {
-        alert('Please enter a valid order receipt email or 16-character license key.');
-      }
+      activateLicense();
     });
 
     // Solana DePay Button Trigger
@@ -685,13 +688,33 @@
     });
   }
 
+  function activateLicense(key) {
+    const input = document.getElementById('inputLicenseKey');
+    const val = (key || (input ? input.value : '')).trim();
+    const upper = val.toUpperCase();
+    if (upper === 'ETSY-PRO-2026' || val.includes('@') || val.length >= 8 || upper === 'SOVEREIGN-PRO-2026' || upper.startsWith('ETSY-')) {
+      localStorage.setItem(STORAGE_KEY, 'true');
+      localStorage.setItem(STORAGE_KEY_ALT, 'true');
+      localStorage.setItem(STORAGE_KEY_PRO, 'true');
+      state.isLicensed = true;
+      updateLicenseUI();
+      closeProModal();
+      showToast('⭐ PRO LICENSE ACTIVATED PERMANENTLY!');
+      return true;
+    } else {
+      showToast('Please enter a valid order receipt email or license key.');
+      console.warn('Invalid key provided.');
+      return false;
+    }
+  }
+
   function openProModal() {
-    const m = document.getElementById('proModal');
+    const m = document.getElementById('proModal') || document.querySelector('[data-alias="licenseModal"]');
     if (m) m.style.display = 'flex';
   }
 
   function closeProModal() {
-    const m = document.getElementById('proModal');
+    const m = document.getElementById('proModal') || document.querySelector('[data-alias="licenseModal"]');
     if (m) m.style.display = 'none';
   }
 
@@ -699,6 +722,10 @@
   window.updateLicenseUI = updateLicenseUI;
   window.openProModal = openProModal;
   window.closeProModal = closeProModal;
+  window.openLicenseModal = openProModal;
+  window.closeLicenseModal = closeProModal;
+  window.activateLicenseKey = activateLicense;
+  window.activateLicense = activateLicense;
 
   function downloadKit() {
     const cadre = state.cadre;
