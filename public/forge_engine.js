@@ -135,8 +135,8 @@
     const badge = document.getElementById('licenseBadge');
     const paywallOverlay = document.getElementById('paywallOverlay');
     const exportLocked = document.getElementById('exportLockedNotice');
-    const salesBanner = document.querySelector('.sales-funnel-banner');
-    const btnActivate = document.getElementById('btnActivateKey');
+    const salesBanner = document.getElementById('salesBanner') || document.querySelector('.sales-funnel-banner');
+    const btnActivate = document.getElementById('btnOpenProModal') || document.getElementById('btnActivateKey');
 
     if (state.isLicensed) {
       if (badge) {
@@ -661,11 +661,15 @@
     });
 
     // Modal Triggers
-    document.getElementById('btnActivateKey')?.addEventListener('click', openProModal);
-    document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
+    document.getElementById('btnOpenProModal')?.addEventListener('click', openProModal);
+    document.getElementById('btn-paywall-key')?.addEventListener('click', openProModal);
+    document.getElementById('btnActivateKey')?.addEventListener('click', () => {
+      activateLicense();
+    });
     document.getElementById('btnSubmitKey')?.addEventListener('click', () => {
       activateLicense();
     });
+    document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
 
     // Solana DePay Button Trigger
     document.querySelectorAll('.btn-solana-pay').forEach(btn => {
@@ -689,7 +693,7 @@
   }
 
   function activateLicense(key) {
-    const input = document.getElementById('inputLicenseKey');
+    const input = document.getElementById('license-input') || document.getElementById('inputLicenseKey') || document.getElementById('licenseKeyInput');
     const val = (key || (input ? input.value : '')).trim();
     const upper = val.toUpperCase();
     if (upper === 'ETSY-PRO-2026' || val.includes('@') || val.length >= 8 || upper === 'SOVEREIGN-PRO-2026' || upper.startsWith('ETSY-')) {
@@ -709,12 +713,12 @@
   }
 
   function openProModal() {
-    const m = document.getElementById('proModal') || document.querySelector('[data-alias="licenseModal"]');
+    const m = document.getElementById('licenseModal') || document.getElementById('proModal') || document.querySelector('[data-alias="paywall-modal"]') || document.querySelector('[data-alias="licenseModal"]');
     if (m) m.style.display = 'flex';
   }
 
   function closeProModal() {
-    const m = document.getElementById('proModal') || document.querySelector('[data-alias="licenseModal"]');
+    const m = document.getElementById('licenseModal') || document.getElementById('proModal') || document.querySelector('[data-alias="paywall-modal"]') || document.querySelector('[data-alias="licenseModal"]');
     if (m) m.style.display = 'none';
   }
 

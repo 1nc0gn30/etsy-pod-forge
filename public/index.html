@@ -804,15 +804,15 @@
         <span class="version-pill" style="font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:9999px;background:rgba(212,175,55,0.15);color:#d4af37;border:1px solid rgba(212,175,55,0.3);margin-left:8px;">v2.5 SOVEREIGN</span>
       </a>
       <div class="header-actions">
-        <div id="licenseBadge" class="brand-badge badge-guest">⚡ FREE TIER</div>
-        <button id="btnActivateKey" class="btn-key-activate" type="button">Enter Key / Pro</button>
+        <div id="licenseBadge" class="brand-badge badge-guest" onclick="window.openProModal()" style="cursor: pointer;">⚡ FREE TIER</div>
+        <button id="btnOpenProModal" data-alias="btnHeaderPro" class="btn-key-activate" type="button" onclick="window.openProModal()">Enter Key / Pro</button>
       </div>
     </div>
   </header>
 
   <main class="container">
     <!-- Above-The-Fold Urgent Sales Funnel Banner -->
-    <section class="sales-funnel-banner" aria-label="Founding Member Offer">
+    <section id="salesBanner" class="sales-funnel-banner" aria-label="Founding Member Offer" data-alias="founding-offer-banner">
       <div class="sales-banner-content">
         <div class="sales-banner-left">
           <span class="sales-urgency-badge">⚡ LIMITED FOUNDING COHORT</span>
@@ -832,6 +832,9 @@
           </a>
           <button type="button" class="btn-checkout-solana btn-solana-pay" title="Pay with Solana or USDC">
             <span>◎ Pay with Solana / USDC</span>
+          </button>
+          <button id="btn-paywall-key" data-alias="btnActivateBanner" type="button" onclick="window.openProModal()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; text-decoration: underline; font-size: 11px; margin-left: 8px;">
+            Activate Key
           </button>
         </div>
       </div>
@@ -983,7 +986,7 @@
   </main>
 
   <!-- Pro Activation Modal -->
-  <div id="proModal" data-alias="licenseModal" class="modal-overlay">
+  <div id="licenseModal" data-alias="paywall-modal proModal" class="modal-overlay">
     <div class="modal-card">
       <button id="closeModalBtn" type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
       <h3 style="font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 8px; color: var(--text-main);">
@@ -1003,12 +1006,12 @@
       </div>
 
       <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
-        <label for="inputLicenseKey" style="display: block; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px;">
+        <label for="license-input" style="display: block; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px;">
           Already purchased? Enter receipt email or license key:
         </label>
         <div style="display: flex; gap: 8px;">
-          <input type="text" id="inputLicenseKey" placeholder="e.g. neal@nealfrazier.tech or ETSY-PRO-2026" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem;">
-          <button id="btnSubmitKey" data-alias="btnActivateKey" type="button" style="background: var(--gold); border: none; color: #000; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: var(--font-mono);">Activate</button>
+          <input type="text" id="license-input" data-alias="inputLicenseKey licenseKeyInput" placeholder="e.g. neal@nealfrazier.tech or ETSY-PRO-2026" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85rem;">
+          <button id="btnActivateKey" data-alias="btnSubmitKey" type="button" style="background: var(--gold); border: none; color: #000; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: var(--font-mono);">Activate</button>
         </div>
       </div>
     </div>
