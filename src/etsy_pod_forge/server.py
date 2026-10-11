@@ -31,6 +31,26 @@ from .mockup_engine import MockupEngine, MockupConfig
 from .prompt_vault import get_all_prompts, get_prompts_by_cadre, search_prompts
 
 
+def _is_local_origin(origin) -> bool:
+    """Browser Origin check. No Origin header = non-browser client (CLI/agent): allowed.
+    Otherwise only http(s)://localhost / 127.0.0.1 / [::1] pages may call this API, so a
+    random website can't drive the local server from the user's browser (CSRF)."""
+    if not origin:
+        return True
+    from urllib.parse import urlparse
+    try:
+        u = urlparse(origin)
+    except ValueError:
+        return False
+    return u.scheme in ("http", "https") and u.hostname in ("localhost", "127.0.0.1", "::1")
+
+
+def _cors_origin(handler) -> str:
+    origin = handler.headers.get("Origin")
+    return origin if origin and _is_local_origin(origin) else "http://127.0.0.1"
+
+
+
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
     daemon_threads = True
     allow_reuse_address = True
@@ -158,7 +178,7 @@ class ForgeRequestHandler(SimpleHTTPRequestHandler):
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(raw)))
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Origin", _cors_origin(self))
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.end_headers()
@@ -176,7 +196,7 @@ class ForgeRequestHandler(SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self) -> None:
         self.send_response(204)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Origin", _cors_origin(self))
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.end_headers()
@@ -235,6 +255,14 @@ class ForgeRequestHandler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self) -> None:
+        if not _is_local_origin(self.headers.get("Origin")):
+            _body = b'{"error": "cross-origin request blocked"}'
+            self.send_response(403)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(_body)))
+            self.end_headers()
+            self.wfile.write(_body)
+            return
         path = urllib.parse.urlparse(self.path).path
         payload = self._read_json_body()
 
@@ -426,7 +454,7 @@ class ForgeRequestHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/zip")
             self.send_header("Content-Disposition", f'attachment; filename="etsy_kit_{cadre}.zip"')
             self.send_header("Content-Length", str(len(zip_bytes)))
-            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Origin", _cors_origin(self))
             self.end_headers()
             self.wfile.write(zip_bytes)
             return
