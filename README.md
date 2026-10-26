@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="assets/hero-banner.svg" alt="Etsy POD Forge — Sovereign Architecture Banner" width="100%" />
+</div>
+
+<br />
+
 # Etsy POD Forge
 
 [![Live App](https://img.shields.io/badge/Live_App-etsy--pod.nullai.tech-gold?style=flat-square)](https://etsy-pod.nullai.tech)
