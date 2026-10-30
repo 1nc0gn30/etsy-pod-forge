@@ -16,7 +16,7 @@
     color: 'sand',
     retail: 34.99,
     activeTab: 'canvas',
-    isLicensed: false,
+    isLicensed: true,
     prompts: [],
     stats: {
       canvases: 1,
@@ -115,19 +115,7 @@
 
   // Check Pro License Status
   function checkLicense() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('licensed') === 'true' || urlParams.get('pro') === 'true' || urlParams.get('pro') === '1' || urlParams.get('key') === 'ETSY-PRO-2026') {
-      localStorage.setItem(STORAGE_KEY, 'true');
-      localStorage.setItem(STORAGE_KEY_ALT, 'true');
-      localStorage.setItem(STORAGE_KEY_PRO, 'true');
-      try {
-        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
-      } catch (e) {}
-    }
-    state.isLicensed = localStorage.getItem(STORAGE_KEY) === 'true' ||
-                       localStorage.getItem(STORAGE_KEY_ALT) === 'true' ||
-                       localStorage.getItem(STORAGE_KEY_PRO) === 'true';
+    state.isLicensed = true;
     updateLicenseUI();
   }
 
@@ -138,41 +126,24 @@
     const salesBanner = document.getElementById('salesBanner') || document.querySelector('.sales-funnel-banner');
     const btnActivate = document.getElementById('btnOpenProModal') || document.getElementById('btnActivateKey');
 
-    if (state.isLicensed) {
-      if (badge) {
-        badge.innerHTML = '⭐ PRO ACTIVE';
-        badge.classList.remove('badge-guest');
-        badge.classList.add('badge-pro');
-      }
-      if (paywallOverlay) {
-        paywallOverlay.style.display = 'none';
-      }
-      const blurs = document.querySelectorAll('.paywall-blur');
-      blurs.forEach(el => el.classList.remove('paywall-blur'));
-      if (exportLocked) {
-        exportLocked.style.display = 'none';
-      }
-      if (salesBanner) {
-        salesBanner.style.display = 'none';
-      }
-      if (btnActivate) {
-        btnActivate.style.display = 'none';
-      }
-    } else {
-      if (badge) {
-        badge.innerHTML = '⚡ FREE TIER';
-        badge.classList.add('badge-guest');
-        badge.classList.remove('badge-pro');
-      }
-      if (paywallOverlay) {
-        paywallOverlay.style.display = 'flex';
-      }
-      if (salesBanner) {
-        salesBanner.style.display = 'block';
-      }
-      if (btnActivate) {
-        btnActivate.style.display = 'inline-block';
-      }
+    if (badge) {
+      badge.innerHTML = '✦ 100% FREE &amp; OPEN ACCESS';
+      badge.classList.remove('badge-guest');
+      badge.classList.add('badge-pro');
+    }
+    if (paywallOverlay) {
+      paywallOverlay.style.display = 'none';
+    }
+    const blurs = document.querySelectorAll('.paywall-blur');
+    blurs.forEach(el => el.classList.remove('paywall-blur'));
+    if (exportLocked) {
+      exportLocked.style.display = 'none';
+    }
+    if (salesBanner) {
+      salesBanner.style.display = 'none';
+    }
+    if (btnActivate) {
+      btnActivate.style.display = 'none';
     }
   }
 
@@ -671,23 +642,16 @@
     });
     document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
 
-    // Solana DePay Button Trigger
+    // Solana Tip Button Trigger (Zero Paywalls)
     document.querySelectorAll('.btn-solana-pay').forEach(btn => {
       btn.addEventListener('click', (e) => {
         if (e && e.preventDefault) e.preventDefault();
-        if (window.DePayButtons) {
-          try {
-            window.DePayButtons.init({
-              integration: '428790dd-7ad1-407c-8ecf-c048c77a4cb8',
-              container: document.body
-            });
-            return;
-          } catch (err) {
-            console.warn('DePay widget initialization error:', err);
-          }
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');
+          showToast('✓ Solana Tip Address copied to clipboard: GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');
+        } else {
+          window.open('solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
         }
-        window.open('https://solana.fm/address/GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
-        openProModal();
       });
     });
   }

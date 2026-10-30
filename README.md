@@ -112,14 +112,13 @@ Or via CLI:
 
 ---
 
-## 💼 Sovereign SaaS Licensing
+## ☕ 100% Free & Open-Access (Zero Paywalls)
 
-- **Founding Member License**: $19 lifetime access (regular $79).
-- **Dual Payment Rails**:
-  - **Stripe**: [Instant Stripe Checkout](https://buy.stripe.com/7sI7sA8hM2X8eFG8ww) (Credit Cards, Apple Pay, Google Pay)
-  - **Solana DePay**: Integration ID `428790dd-7ad1-407c-8ecf-c048c77a4cb8` (Receiver `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`, BTC `bc1p2dr247zklh8pnffak0ew7m82u2w8gx25ys28x7aavr95z674ydzsfw500t`)
-- **Instant Client-Side Activation**:
-  - Append `?licensed=true` in the URL or enter your receipt email/key into the Pro Modal to permanently unlock all high-res master exports.
+Etsy POD Forge is **100% free, open-access, and unlocked by default**. All 300 DPI canvas generators, photorealistic mockup engines, and 13-tag SEO listing kits are fully unlocked with zero paywalls.
+
+If you find this tool valuable, optional community support is welcome via:
+- **☕ Buy Us a Coffee (Stripe)**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
+- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK` (`solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`)
 
 ---
 
