@@ -41,7 +41,7 @@ Targeted specifically at the **50–75+ women demographic** on Etsy—the highes
 - **Prompt Vault (`prompt_vault.py`)**:
   - 50+ battle-tested prompt recipes for Midjourney v6.1, Flux.1, and SDXL across all 5 cadres.
 - **Sovereign Telemetry & Mesh Synchronization**:
-  - Emits telemetry events to `agent-flight-recorder` (`http://127.0.0.1:8104/api/ingest`).
+  - Emits telemetry events to `agent-flight-recorder` (`http://127.0.0.1:8107/api/ingest`).
   - Stores strategic commerce memories in `neuro-memory-daemon` (`http://127.0.0.1:8094/api/memories`).
 - **Avant-Garde Web Cockpit & REST API (`server.py` on Port 8107)**:
   - Dark obsidian UI (`#08080B`) with gold accents (`#D4AF37`) and emerald safety badges (`#10B981`).
@@ -124,7 +124,7 @@ If you find this tool valuable, optional community support is welcome via:
 
 ## 📜 Attribution
 
-Engineered by **Neal Frazier Tech** ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)
+Engineered by **1nc0gn30 • NullAI** ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)
 
 ## Network exposure
 

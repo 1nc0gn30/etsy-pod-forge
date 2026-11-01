@@ -1,6 +1,6 @@
 # Claude Motion Graphics & Product Showreel Blueprint
 ## Product: Etsy POD Forge — Autonomous Commerce Studio for 50-75+ Women Demographic
-**Entity**: Neal Frazier Tech (`@1nc0gn30`) • **Platform**: NullAI Platform  
+**Entity**: 1nc0gn30 • NullAI (`@1nc0gn30`) • **Platform**: NullAI Platform  
 **Methodology**: Claude Opus 5.5 Code-to-Motion / Revid.ai Motion Graphics Architecture
 
 ---
@@ -36,9 +36,9 @@ Split-second montage of hyper-realistic lifestyle composites:
 [SCENE 4: 11.5s – 15.0s] — CALL TO ACTION & SOVEREIGN LAUNCH
 Camera snaps to centered heroic monolith. Glowing founding member card floats forward with pure CSS conic border beam:
 "ETSY POD FORGE • DAY 7 REVENUE ENGINE"
-"START YOUR AUTOMATED STORE TODAY — $19 LIFETIME FOUNDING ACCESS"
+"START YOUR AUTOMATED STORE TODAY — $0 LIFETIME FOUNDING ACCESS"
 Dual checkout badges pulse: Stripe Card & Solana Tip.
-Subtle attribution lockup: "Engineered by Neal Frazier Tech (@1nc0gn30) • NullAI Platform".
+Subtle attribution lockup: "Engineered by 1nc0gn30 (@1nc0gn30) • NullAI Platform".
 ```
 
 ---
@@ -50,7 +50,7 @@ Subtle attribution lockup: "Engineered by Neal Frazier Tech (@1nc0gn30) • Null
 00:05 - 00:12 | The Problem: "Manual design creation takes hours, mockups look fake, and Etsy search algorithms bury listings without exact 13-tag keyword compliance."
 00:12 - 00:20 | The Solution: "Enter Etsy POD Forge. 5 battle-tested product cadres: Grandma's Garden apparel, songbird ceramic mugs, French seed totes, 300 DPI wall art packs, and quilting pattern blueprints."
 00:20 - 00:26 | Real Economics: "Instant profit calculation accounting for listing fees, payment processing, and DTG production. Average net margin: 53% to 98%."
-00:26 - 00:30 | Call to Action: "Secure Founding Member lifetime access for $19 before general public rollout. Dual Stripe & Solana checkout live now."
+00:26 - 00:30 | Call to Action: "Secure Founding Member lifetime access for $0 before general public rollout. Dual Stripe & Solana checkout live now."
 ```
 
 ---
