@@ -137,3 +137,60 @@ network.
 
 - The browser API only accepts cross-origin requests from `localhost` / `127.0.0.1` pages. POSTs from any other website get `403`, and CORS echoes only local origins (never `*`), so a site you visit can't drive or read this local server. CLI and agent clients (no `Origin` header) are unaffected.
 - No store credentials; everything is generated locally.
+
+---
+
+## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
+
+```mermaid
+flowchart LR
+    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
+        CLI["etsy-pod-forge --help / --json"]
+        TUI["etsy-pod-forge-tui<br/>Unicode U+2800 2x4 Braille"]
+    end
+
+    subgraph Workstation["⚡ Sovereign Workstation"]
+        WEB["http://127.0.0.1:8107<br/>REST API & /health"]
+    end
+
+    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
+        GODMODE["http://127.0.0.1:3000/tools/etsy-pod-forge<br/>God-Mode Workstation"]
+        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
+    end
+
+    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
+        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
+        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
+        NOTE["Studio/Tools/Studio etsy-pod-forge.md"]
+    end
+
+    CLI --> WEB
+    TUI --> WEB
+    WEB <--> GODMODE
+    WEB <--> LITE
+    WEB --> TRACKER
+    TRACKER <--> NOTE
+    NOTE <--> NEURO
+```
+
+### Cross-Surface Integration Matrix
+
+| Surface | Endpoint / Binary | Capabilities |
+| :--- | :--- | :--- |
+| **Standalone Workstation** | `http://127.0.0.1:8107` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
+| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/etsy-pod-forge` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
+| **ZothOS v3.4 CLI & TUI** | `etsy-pod-forge` / `etsy-pod-forge-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
+| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
+| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio etsy-pod-forge.md`) |
+| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+
+```bash
+# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
+etsy-pod-forge --help
+etsy-pod-forge-tui --status
+etsy-pod-forge-tui --json
+
+# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
+zoth-obsidian-tracker --verify
+```
+
