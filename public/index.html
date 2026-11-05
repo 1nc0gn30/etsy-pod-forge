@@ -995,6 +995,22 @@
   </footer>
 
   <script src="/forge_engine.js"></script>
-  <script src="/assets/sovereign-upgrade.js" defer></script>
+  
+
+  <script src="/sovereign_tutorial.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.createSovereignTutorial) {
+        window.createSovereignTutorial({
+          toolId: "etsy-pod-forge",
+          toolName: "Etsy POD Forge",
+          tagline: "Automate Print-on-Demand products from art to live store listings!",
+          accentColor: "#EC4899",
+          steps: [{"icon": "\ud83d\udc55", "title": "What is Print-on-Demand?", "desc": "Sell custom t-shirts, mugs, and posters without buying inventory! When a customer orders, a printer makes and ships it for you."}, {"icon": "\ud83c\udfa8", "title": "Instant Product Mockups", "desc": "Upload an image and see it placed realistically onto shirts, hoodies, and wall art in seconds."}, {"icon": "\ud83d\ude80", "title": "One-Click Store Export", "desc": "Generates complete listings with high-converting titles, descriptions, and tag payloads."}]
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
