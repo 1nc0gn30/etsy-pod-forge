@@ -686,6 +686,21 @@
     if (m) m.style.display = 'none';
   }
 
+  function copySolanaAddress(btn) {
+    const addr = 'GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK';
+    navigator.clipboard.writeText(addr).then(() => {
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Solana Address Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 2500);
+      }
+      showToast('✓ Solana Tip Address copied to clipboard!');
+    }).catch(() => {
+      window.open('solana:' + addr, '_blank');
+    });
+  }
+
+  window.copySolanaAddress = copySolanaAddress;
   window.checkLicense = checkLicense;
   window.updateLicenseUI = updateLicenseUI;
   window.openProModal = openProModal;

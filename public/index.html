@@ -425,50 +425,6 @@
       border-radius: 8px;
     }
 
-    /* Frosted Glass Paywall Overlay */
-    .paywall-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(8, 8, 11, 0.72);
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-      text-align: center;
-      z-index: 10;
-    }
-    .paywall-lock-card {
-      background: rgba(24, 20, 32, 0.95);
-      border: 1px solid var(--gold);
-      border-radius: 14px;
-      padding: 24px;
-      max-width: 380px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-    .paywall-lock-icon {
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-    }
-    .paywall-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
-    .paywall-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-    .paywall-btns {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     /* Controls Strip */
     .controls-strip {
       margin-top: 18px;
@@ -833,8 +789,8 @@
 
 <div id="zoth-coffee-support-bar" style="background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(212,175,55,0.14)); border-bottom: 1px solid rgba(212,175,55,0.35); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; z-index: 9999;">
   <span style="color: #10B981; font-weight: 800;">✦ 100% FREE &amp; OPEN ACCESS · ZERO PAYWALLS</span>
-  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee (Stripe)</a>
-  <a href="solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK" onclick="if(navigator.clipboard){navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');this.textContent='✓ Copied GG2eQb...dXoK!';}" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">◎ Solana Tip (GG2e...dXoK)</a>
+  <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" style="background: #D4AF37; color: #08080B; padding: 4px 12px; border-radius: 6px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">☕ Buy Us a Coffee</a>
+  <button type="button" id="btn-copy-solana" onclick="copySolanaAddress(this)" style="background: rgba(20,241,149,0.15); color: #14F195; border: 1px solid rgba(20,241,149,0.45); padding: 4px 12px; border-radius: 6px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: inherit;">◎ Tip Solana: GG2e...dXoK</button>
 </div>
 
   <div class="aurora-bar"></div>
@@ -985,7 +941,7 @@
   <footer>
     <div class="container">
       <p>
-        Engineered by <strong>1nc0gn30 • NullAI</strong> (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener noreferrer">@1nc0gn30</a>) • 
+        Engineered by Neal Frazier Tech (<a href="https://github.com/1nc0gn30" target="_blank" rel="noopener noreferrer">@1nc0gn30</a>) • 
         <a href="https://nullai.tech" target="_blank" rel="noopener noreferrer">NullAI Platform</a>
       </p>
       <p style="margin-top: 6px; color: rgba(255,255,255,0.3); font-size: 0.75rem;">
