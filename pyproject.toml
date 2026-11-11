@@ -16,6 +16,11 @@ dependencies = [
     "pillow>=10.0.0"
 ]
 
+[project.urls]
+Homepage = "https://zoth.nullai.tech/tools/etsy-pod-forge"
+Repository = "https://github.com/1nc0gn30/etsy-pod-forge"
+Documentation = "https://nullai.tech"
+
 [project.scripts]
 etsy-pod-forge = "etsy_pod_forge.cli:main"
 

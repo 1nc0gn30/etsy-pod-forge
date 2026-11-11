@@ -16,7 +16,6 @@
     color: 'sand',
     retail: 34.99,
     activeTab: 'canvas',
-    isLicensed: true,
     prompts: [],
     stats: {
       canvases: 1,
@@ -113,37 +112,17 @@
   const STORAGE_KEY_ALT = 'zoth_etsy_pod_licensed';
   const STORAGE_KEY_PRO = 'pro_licensed';
 
-  // Check Pro License Status
+  // Initialize Open-Source UI State
   function checkLicense() {
-    state.isLicensed = true;
     updateLicenseUI();
   }
 
   function updateLicenseUI() {
     const badge = document.getElementById('licenseBadge');
-    const paywallOverlay = document.getElementById('paywallOverlay');
-    const exportLocked = document.getElementById('exportLockedNotice');
-    const salesBanner = document.getElementById('salesBanner') || document.querySelector('.sales-funnel-banner');
-    const btnActivate = document.getElementById('btnOpenProModal') || document.getElementById('btnActivateKey');
-
     if (badge) {
-      badge.innerHTML = '✦ 100% FREE &amp; OPEN ACCESS';
+      badge.innerHTML = '✦ OPEN SOURCE';
       badge.classList.remove('badge-guest');
       badge.classList.add('badge-pro');
-    }
-    if (paywallOverlay) {
-      paywallOverlay.style.display = 'none';
-    }
-    const blurs = document.querySelectorAll('.paywall-blur');
-    blurs.forEach(el => el.classList.remove('paywall-blur'));
-    if (exportLocked) {
-      exportLocked.style.display = 'none';
-    }
-    if (salesBanner) {
-      salesBanner.style.display = 'none';
-    }
-    if (btnActivate) {
-      btnActivate.style.display = 'none';
     }
   }
 
@@ -620,95 +599,16 @@
       showToast('Copied all 13 Etsy Tags to clipboard!');
     });
 
-    // Export Action Interceptors
+    // Export Actions
     document.querySelectorAll('.btn-export-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
-        if (!state.isLicensed) {
-          openProModal();
-        } else {
-          downloadKit();
-        }
-      });
-    });
-
-    // Modal Triggers
-    document.getElementById('btnOpenProModal')?.addEventListener('click', openProModal);
-    document.getElementById('btn-paywall-key')?.addEventListener('click', openProModal);
-    document.getElementById('btnActivateKey')?.addEventListener('click', () => {
-      activateLicense();
-    });
-    document.getElementById('btnSubmitKey')?.addEventListener('click', () => {
-      activateLicense();
-    });
-    document.getElementById('closeModalBtn')?.addEventListener('click', closeProModal);
-
-    // Solana Tip Button Trigger (Zero Paywalls)
-    document.querySelectorAll('.btn-solana-pay').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if (e && e.preventDefault) e.preventDefault();
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText('GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');
-          showToast('✓ Solana Tip Address copied to clipboard: GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK');
-        } else {
-          window.open('solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK', '_blank');
-        }
+        downloadKit();
       });
     });
   }
 
-  function activateLicense(key) {
-    const input = document.getElementById('license-input') || document.getElementById('inputLicenseKey') || document.getElementById('licenseKeyInput');
-    const val = (key || (input ? input.value : '')).trim();
-    const upper = val.toUpperCase();
-    if (upper === 'ETSY-PRO-2026' || val.includes('@') || val.length >= 8 || upper === 'SOVEREIGN-PRO-2026' || upper.startsWith('ETSY-')) {
-      localStorage.setItem(STORAGE_KEY, 'true');
-      localStorage.setItem(STORAGE_KEY_ALT, 'true');
-      localStorage.setItem(STORAGE_KEY_PRO, 'true');
-      state.isLicensed = true;
-      updateLicenseUI();
-      closeProModal();
-      showToast('⭐ PRO LICENSE ACTIVATED PERMANENTLY!');
-      return true;
-    } else {
-      showToast('Please enter a valid order receipt email or license key.');
-      console.warn('Invalid key provided.');
-      return false;
-    }
-  }
-
-  function openProModal() {
-    const m = document.getElementById('licenseModal') || document.getElementById('proModal') || document.querySelector('[data-alias="paywall-modal"]') || document.querySelector('[data-alias="licenseModal"]');
-    if (m) m.style.display = 'flex';
-  }
-
-  function closeProModal() {
-    const m = document.getElementById('licenseModal') || document.getElementById('proModal') || document.querySelector('[data-alias="paywall-modal"]') || document.querySelector('[data-alias="licenseModal"]');
-    if (m) m.style.display = 'none';
-  }
-
-  function copySolanaAddress(btn) {
-    const addr = 'GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK';
-    navigator.clipboard.writeText(addr).then(() => {
-      if (btn) {
-        const orig = btn.textContent;
-        btn.textContent = '✓ Solana Address Copied!';
-        setTimeout(() => { btn.textContent = orig; }, 2500);
-      }
-      showToast('✓ Solana Tip Address copied to clipboard!');
-    }).catch(() => {
-      window.open('solana:' + addr, '_blank');
-    });
-  }
-
-  window.copySolanaAddress = copySolanaAddress;
   window.checkLicense = checkLicense;
   window.updateLicenseUI = updateLicenseUI;
-  window.openProModal = openProModal;
-  window.closeProModal = closeProModal;
-  window.openLicenseModal = openProModal;
-  window.closeLicenseModal = closeProModal;
-  window.activateLicenseKey = activateLicense;
-  window.activateLicense = activateLicense;
 
   function downloadKit() {
     const cadre = state.cadre;

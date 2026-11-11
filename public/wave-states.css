@@ -34,9 +34,6 @@
 .brand-title:focus-visible,
 .brand-badge:focus-visible,
 #licenseBadge:focus-visible,
-.btn-key-activate:focus-visible,
-#btnOpenProModal:focus-visible,
-#btn-paywall-key:focus-visible,
 .cadre-btn:focus-visible,
 .view-tab-btn:focus-visible,
 .btn-copy-chip:focus-visible,
@@ -154,15 +151,6 @@ footer a:focus-visible {
 
 .btn-checkout-solana:active {
   transform: translateY(1px);
-}
-
-/* Activate key link in sales banner */
-#btn-paywall-key {
-  transition: color 150ms ease;
-}
-
-#btn-paywall-key:hover {
-  color: var(--gold) !important;
 }
 
 /* Cadre buttons */

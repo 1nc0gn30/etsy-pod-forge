@@ -1,196 +1,133 @@
-<div align="center">
-  <img src="assets/hero-banner.svg" alt="Etsy POD Forge — Sovereign Architecture Banner" width="100%" />
-</div>
-
-<br />
+<p align="center">
+  <img src="assets/hero-banner.svg" alt="Etsy POD Forge — Print-on-Demand 300 DPI Canvas Generator, Product Mockup Compositor & Etsy SEO Listing Synthesizer" width="100%" />
+</p>
 
 # Etsy POD Forge
 
-[![Live App](https://img.shields.io/badge/Live_App-etsy--pod.nullai.tech-gold?style=flat-square)](https://etsy-pod.nullai.tech)
-[![Dual Rails](https://img.shields.io/badge/Dual_Checkout-Stripe_%2B_Solana-success?style=flat-square)](https://etsy-pod.nullai.tech)
-[![Zero Pip Bloat](https://img.shields.io/badge/dependencies-Pillow%20only-gold.svg)](pyproject.toml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
-[![NullAI Platform](https://img.shields.io/badge/platform-NullAI-black.svg)](https://nullai.tech)
+**Python 3.10+ print-on-demand 300 DPI transparent PNG canvas generator, lifestyle product mockup compositor, 13-tag Etsy SEO listing synthesizer, prompt catalog, and loopback HTTP studio.**
 
-**Autonomous Print-on-Demand Studio, 300 DPI Canvas Generator & Etsy SEO Listing Synthesizer.**
-
-Targeted specifically at the **50–75+ women demographic** on Etsy—the highest lifetime customer value and largest discretionary spenders on the platform—to accelerate the sovereign treasury toward the **$100,000 milestone**.
+- **Zoth Studio v2 Dossier**: [https://zoth.nullai.tech/tools/etsy-pod-forge](https://zoth.nullai.tech/tools/etsy-pod-forge)
+- **Default Loopback Endpoint**: `http://127.0.0.1:8107`
+- **Runtime Dependencies**: `Pillow>=10.0.0` (all HTTP/CLI/ZIP logic uses Python `stdlib`)
+- **License**: MIT (100% free and open-source)
 
 ---
 
-## ⚡ Key Architectural Capabilities
+## Overview
 
-- **Zero Pip Dependencies beyond Pillow**:
-  - 100% Python standard library (`http.server`, `urllib`, `socket`, `json`, `threading`, `zipfile`, `dataclasses`, `time`) and PIL. Zero runtime bloat.
-- **5 High-LTV Product Cadres**:
-  - **Cadre 1: "Grandma's Garden" Floral & Family Apparel**: Comfort Colors 1717 tees and Gildan 18000 sweatshirts with personalized birth-month flowers and grandchildren names.
-  - **Cadre 2: Whimsical Watercolor Animal & Bird Mugs**: 15oz ceramic mugs featuring fluffy chickadees, northern cardinals, bluebirds, and sweet teacup still lifes.
-  - **Cadre 3: Heavyweight Canvas Farmers Market & Library Totes**: French seed packet engravings and literary book-club bags on durable 12oz cotton canvas.
-  - **Cadre 4: High-Res Digital Download Wall Art Packs**: 300 DPI 5-ratio gallery bundles (2:3, 3:4, 4:5, 11:14, ISO A1–A4) with 98% net margins.
-  - **Cadre 5: Printable Quilting & Crafting Blueprints**: Step-by-step vector templates, rotary cutting guides, and 8-point Barn Star quilt blueprints.
-- **Print-Ready 300 DPI Transparent PNG Canvas Generator (`canvas_generator.py`)**:
-  - Generates master direct-to-garment (DTG) print files (4500x5400 px for apparel, 2000x2000 px for mugs, 3600x3600 px for totes) with vector-crisp botanical florals and vintage serif typography.
-- **Photorealistic Lifestyle Mockup Engine (`mockup_engine.py`)**:
-  - Automatically composites designs onto realistic product backgrounds: folded crewneck on rustic wooden table with dried lavender sprigs, ceramic mug with soft morning light, tote bag hanging on farmhouse iron hook.
-- **100% Invariant Etsy SEO Listing Synthesizer (`listing_synthesizer.py`)**:
-  - Titles strictly &le; 140 characters, keyword-stacked for maximum Etsy search rank.
-  - Exactly 13 high-volume search tags, each strictly &le; 20 characters.
-  - High-converting customer descriptions with emotional gift hooks, unisex sizing charts, and washing instructions.
-  - Accurate profit margin analytics accounting for Etsy transaction fees (6.5%), payment processing (3% + $0.25), and listing fees ($0.20).
-- **Prompt Vault (`prompt_vault.py`)**:
-  - 50+ battle-tested prompt recipes for Midjourney v6.1, Flux.1, and SDXL across all 5 cadres.
-- **Sovereign Telemetry & Mesh Synchronization**:
-  - Emits telemetry events to `agent-flight-recorder` (`http://127.0.0.1:8107/api/ingest`).
-  - Stores strategic commerce memories in `neuro-memory-daemon` (`http://127.0.0.1:8094/api/memories`).
-- **Avant-Garde Web Cockpit & REST API (`server.py` on Port 8107)**:
-  - Dark obsidian UI (`#08080B`) with gold accents (`#D4AF37`) and emerald safety badges (`#10B981`).
-  - Real-time interactive canvas preview, tag copy buttons, and export package downloader.
+`etsy-pod-forge` automates asset and listing preparation for print-on-demand storefronts across apparel (`4500x5400 px @ 300 DPI`), ceramic mugs, canvas totes, and wall art cadres:
+
+- **300 DPI Print Canvas Generator**: Renders transparent RGBA PNG print files (`CanvasGenerator`) with custom titles, subtitles, and personalized name arrays.
+- **Lifestyle Mockup Compositor**: Composites generated print artwork onto garment, mug, tote, or frame mockups (`MockupEngine`) with configurable colorways.
+- **Etsy Listing Kit Synthesizer**: Builds<=140-character titles, 13 search tags (`<=20` chars each, zero duplicates), structured descriptions, and fee/margin breakdowns (`listing_synthesizer.py`) with strict invariant validation.
+- **ZIP Asset Bundler & Prompt Catalog**: Packages print PNG, lifestyle JPEG, `listing_details.txt`, and `listing_data.json` into a single downloadable ZIP archive alongside searchable image-generation prompt recipes.
 
 ---
 
-## 🚀 Quickstart CLI
+## Architecture
 
-### 1. Synthesize Complete Etsy Listing Kit
-```bash
-./bin/etsy-pod-forge listing --cadre apparel
-```
-
-### 2. Generate Print-Ready 300 DPI Canvas
-```bash
-./bin/etsy-pod-forge generate --cadre apparel --title "GRANDMA'S GARDEN" --names "Emma, Liam, Olivia" --out canvas.png
-```
-
-### 3. Composite Realistic Lifestyle Mockup
-```bash
-./bin/etsy-pod-forge mockup --cadre mugs --color white --out mockup.jpg
-```
-
-### 4. Browse 50+ AI Prompt Recipes
-```bash
-./bin/etsy-pod-forge prompts --cadre apparel --limit 5
-```
-
-### 5. Start the Web Cockpit & REST API (Port 8107)
-```bash
-./bin/etsy-pod-forge serve --port 8107
-```
-Open [http://localhost:8107](http://localhost:8107) in your browser.
-
-### 6. Query Live Telemetry Status
-```bash
-./bin/etsy-pod-forge status
+```text
+src/etsy_pod_forge/
+├── canvas_generator.py     # Pillow RGBA 300 DPI print canvas renderer across POD cadres
+├── mockup_engine.py        # Lifestyle product mockup compositor and colorway renderer
+├── listing_synthesizer.py  # Etsy 140-char title, 13-tag validator & fee/net-margin calculator
+├── prompt_vault.py         # Searchable POD design prompt catalog by cadre and keyword
+├── server.py               # Multi-threaded loopback HTTP API + web studio (127.0.0.1:8107)
+└── cli.py                  # Unified CLI entrypoint (`etsy-pod-forge`)
 ```
 
 ---
 
-## 🛡 REST API Reference (Port 8107)
+## Quickstart
 
-| Endpoint | Method | Description |
-|:---|:---:|:---|
-| `/api/generate-canvas` | `POST` | Generates 300 DPI transparent PNG canvas (returns Base64) |
-| `/api/generate-mockup` | `POST` | Composites design onto lifestyle product mockup (returns Base64) |
-| `/api/generate-listing` | `POST` | Synthesizes Etsy SEO title, 13 tags, copy, and profit margin metrics |
-| `/api/export-kit` | `POST` | Packages canvas, mockup, and listing metadata into instant ZIP download |
-| `/api/cadres` | `GET` | Returns specifications and default pricing for all 5 product cadres |
-| `/api/prompts` | `GET` | Returns 50+ AI prompt recipes (supports `?cadre=` and `?q=` search) |
-| `/api/stats` | `GET` | Operational telemetry: designs rendered, mockups created, revenue projected |
-| `/api/health` | `GET` | Liveness and health check probe |
-
----
-
-## 🧪 Testing Suite
-
-Run the full automated test suite (19/19 tests passing):
 ```bash
-pytest -v tests/
+git clone https://github.com/1nc0gn30/etsy-pod-forge.git
+cd etsy-pod-forge
+python3 -m pip install -e .
+
+# Launch the loopback web studio on http://127.0.0.1:8107
+python3 server.py --host 127.0.0.1 --port 8107
 ```
-Or via CLI:
+
+Or launch via the CLI entrypoint:
+
 ```bash
-./bin/etsy-pod-forge test
+etsy-pod-forge serve --host 127.0.0.1 --port 8107
 ```
 
 ---
 
-## ☕ 100% Free & Open-Access (Zero Paywalls)
-
-Etsy POD Forge is **100% free, open-access, and unlocked by default**. All 300 DPI canvas generators, photorealistic mockup engines, and 13-tag SEO listing kits are fully unlocked with zero paywalls.
-
-If you find this tool valuable, optional community support is welcome via:
-- **☕ Buy Us a Coffee (Stripe)**: [https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- **◎ Solana Tip Address**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK` (`solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`)
-
----
-
-## 📜 Attribution
-
-Engineered by **1nc0gn30 • NullAI** ([@1nc0gn30](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech)
-
-## Network exposure
-
-The server binds to `127.0.0.1` by default. To reach it from other devices,
-opt in explicitly with `--host 0.0.0.0` (or set `ZOTH_BIND_HOST=0.0.0.0`; an IP
-in `HOST` is also honoured, a plain hostname is ignored) and only on a trusted
-network.
-
-## Safety
-
-- The browser API only accepts cross-origin requests from `localhost` / `127.0.0.1` pages. POSTs from any other website get `403`, and CORS echoes only local origins (never `*`), so a site you visit can't drive or read this local server. CLI and agent clients (no `Origin` header) are unaffected.
-- No store credentials; everything is generated locally.
-
----
-
-## 🏛️ ZothOS v3.4, Zoth Studio v2 & Obsidian Second Brain Ecosystem
-
-```mermaid
-flowchart LR
-    subgraph ZothOS["🐧 ZothOS v3.4 CLI & Braille TUI"]
-        CLI["etsy-pod-forge --help / --json"]
-        TUI["etsy-pod-forge-tui<br/>Unicode U+2800 2x4 Braille"]
-    end
-
-    subgraph Workstation["⚡ Sovereign Workstation"]
-        WEB["http://127.0.0.1:8107<br/>REST API & /health"]
-    end
-
-    subgraph Studio["🌌 Zoth Studio v2 & ZothOS-Lite"]
-        GODMODE["http://127.0.0.1:3000/tools/etsy-pod-forge<br/>God-Mode Workstation"]
-        LITE["http://127.0.0.1:8145<br/>ZothOS-Lite Web Desktop"]
-    end
-
-    subgraph SecondBrain["💎 Obsidian Second Brain & STDP"]
-        TRACKER["http://127.0.0.1:8151<br/>Zoth Obsidian Tracker"]
-        NEURO["http://127.0.0.1:8094<br/>Neuro-Memory STDP Cortex"]
-        NOTE["Studio/Tools/Studio etsy-pod-forge.md"]
-    end
-
-    CLI --> WEB
-    TUI --> WEB
-    WEB <--> GODMODE
-    WEB <--> LITE
-    WEB --> TRACKER
-    TRACKER <--> NOTE
-    NOTE <--> NEURO
-```
-
-### Cross-Surface Integration Matrix
-
-| Surface | Endpoint / Binary | Capabilities |
-| :--- | :--- | :--- |
-| **Standalone Workstation** | `http://127.0.0.1:8107` | 100% Free & Open-Access Web Deck, live `/health` & REST telemetry |
-| **Zoth Studio v2 Route** | `http://127.0.0.1:3000/tools/etsy-pod-forge` | Interactive God-Mode component inside Zoth Studio (`https://zoth.nullai.tech`) |
-| **ZothOS v3.4 CLI & TUI** | `etsy-pod-forge` / `etsy-pod-forge-tui` | Global binary in `/usr/local/bin/` with Unicode `U+2800` Braille TUI & `--json` output |
-| **ZothOS-Lite Web Desktop** | `http://127.0.0.1:8145` | Browser-native KDE-style window manager & terminal launcher |
-| **Zoth Obsidian Tracker** | `http://127.0.0.1:8151` | Interactive Obsidian Second Brain vault explorer (`~/Documents/Obsidian Vault/Studio/Tools/Studio etsy-pod-forge.md`) |
-| **Neuro-Memory STDP Cortex** | `http://127.0.0.1:8094` | 3-Factor STDP synaptic memory daemon & 21-tool MCP server |
+## CLI Usage
 
 ```bash
-# Inspect CLI & Unicode U+2800 Braille TUI on ZothOS v3.4
+# View CLI help
 etsy-pod-forge --help
-etsy-pod-forge-tui --status
-etsy-pod-forge-tui --json
 
-# Verify Second Brain Vault & 12-Step Verification Gallery on :8151
-zoth-obsidian-tracker --verify
+# Generate a print-ready 300 DPI PNG canvas (or --preview for quick inspection)
+etsy-pod-forge generate --cadre apparel --title "Grandma's Garden" --names "Emma,Liam,Olivia" --out apparel_canvas.png
+
+# Composite artwork onto a lifestyle product mockup
+etsy-pod-forge mockup --cadre apparel --color sand --out apparel_mockup.jpg
+
+# Synthesize an Etsy SEO listing kit with invariant validation and JSON output
+etsy-pod-forge listing --cadre apparel --retail 34.99 --cost 12.50 --json
+
+# Search or filter the prompt recipe catalog
+etsy-pod-forge prompts --cadre apparel --limit 5
+etsy-pod-forge prompts --search botanical
+
+# Query live server telemetry on port 8107
+etsy-pod-forge status --port 8107
 ```
 
+### ZothOS v3.4.0 CLI Integration
+
+On ZothOS v3.4.0 workstations, `etsy-pod-forge` and `etsy-pod-forge-tui` are installed in `/usr/local/bin/`:
+
+```bash
+etsy-pod-forge listing --cadre apparel --json
+etsy-pod-forge-tui --json
+etsy-pod-forge serve --port 8107
+```
+
+---
+
+## HTTP API Reference
+
+When running on `http://127.0.0.1:8107`:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health`, `/api/health` | Service health status, port, version, and uptime |
+| `GET` | `/api/stats` | Render, mockup, listing, and export counters |
+| `GET` | `/api/cadres` | Supported POD product cadres and print specifications |
+| `GET` | `/api/prompts` | Prompt catalog (`?cadre=...` or `?q=...`) |
+| `POST` | `/api/generate-canvas` | Render base64 PNG print canvas (`cadre`, `preview`, `title`, `subtitle`, `names`) |
+| `POST` | `/api/generate-mockup` | Composite base64 JPEG lifestyle mockup (`cadre`, `color`, `title`, `names`) |
+| `POST` | `/api/generate-listing` | Synthesize Etsy title, 13 tags, description, fees, and invariant check |
+| `POST` | `/api/export-kit` | Download a `.zip` bundle with print PNG, mockup JPEG, text, and JSON kit |
+
+---
+
+## Testing & Verification
+
+```bash
+# Run the pytest suite
+PYTHONPATH=src python3 -m pytest -q
+
+# Or run via CLI subcommand
+etsy-pod-forge test
+
+# Scan repository with gitleaks
+gitleaks detect --source . --no-banner --redact
+```
+
+---
+
+## Support
+
+Etsy POD Forge is 100% free and open-source software. Optional community support is available via [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X).
+
+## License
+
+MIT License — Copyright (c) 2026 [1nc0gn30](https://1nc0gn30.si) (`@1nc0gn30`) & [NullAI](https://nullai.tech). See [LICENSE](LICENSE) for full text.
