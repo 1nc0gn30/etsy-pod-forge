@@ -22,9 +22,8 @@
 
 /* Distinctive primary actions & checkout buttons */
 .btn-checkout-stripe:focus-visible,
-.btn-checkout-solana:focus-visible,
 .btn-action-primary:focus-visible,
-#btnActivateKey:focus-visible {
+#btnHeaderCoffee:focus-visible {
   outline: 2px solid var(--gold-light);
   outline-offset: 3px;
   box-shadow: 0 0 0 1px var(--bg-dark), 0 0 14px rgba(243, 229, 171, 0.45);
@@ -33,7 +32,6 @@
 /* Secondary triggers, navigation chips, and header badges */
 .brand-title:focus-visible,
 .brand-badge:focus-visible,
-#licenseBadge:focus-visible,
 .cadre-btn:focus-visible,
 .view-tab-btn:focus-visible,
 .btn-copy-chip:focus-visible,
@@ -50,8 +48,7 @@ footer a:focus-visible {
 .form-input:focus-visible,
 .title-textarea:focus-visible,
 #inputTitle:focus-visible,
-#inputNames:focus-visible,
-#license-input:focus-visible {
+#inputNames:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 0;
   border-color: var(--gold);
@@ -92,30 +89,19 @@ footer a:focus-visible {
   color: var(--gold);
 }
 
-/* Header license badge */
-.brand-badge,
-#licenseBadge {
+/* Header open-access badge */
+.brand-badge {
   transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 150ms ease;
 }
 
-.badge-guest:hover {
-  background: rgba(212, 175, 55, 0.22);
-  border-color: var(--gold-light);
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
-}
-
-.badge-pro:hover {
+.badge-open:hover {
   background: rgba(16, 185, 129, 0.25);
   border-color: #34d399;
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.25);
 }
 
-#licenseBadge:active {
-  transform: scale(0.97);
-}
-
-/* Enter Key / Pro button */
-.btn-key-activate {
+/* Buy Us a Coffee header CTA */
+.btn-coffee-cta {
   transition: border-color 180ms ease, color 180ms ease, background 180ms ease, transform 150ms ease;
 }
 
@@ -324,8 +310,7 @@ footer a:hover {
 
 /* Input placeholder formatting */
 .form-input::placeholder,
-.title-textarea::placeholder,
-#license-input::placeholder {
+.title-textarea::placeholder {
   color: rgba(163, 163, 178, 0.45);
   font-style: italic;
 }
@@ -349,20 +334,16 @@ footer a:hover {
   outline-offset: 1px;
 }
 
-/* General form input & license input error presentation */
+/* General form input error presentation */
 .form-input:invalid,
-.form-input:user-invalid,
-#license-input:invalid,
-#license-input:user-invalid {
+.form-input:user-invalid {
   border-color: var(--terracotta) !important;
   background: rgba(196, 112, 88, 0.08);
   box-shadow: 0 0 0 1px var(--terracotta), 0 0 8px rgba(196, 112, 88, 0.3);
 }
 
 .form-input:invalid:focus-visible,
-.form-input:user-invalid:focus-visible,
-#license-input:invalid:focus-visible,
-#license-input:user-invalid:focus-visible {
+.form-input:user-invalid:focus-visible {
   outline: 2px solid var(--terracotta) !important;
   outline-offset: 1px;
 }

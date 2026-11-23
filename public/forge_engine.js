@@ -107,25 +107,6 @@
     }
   };
 
-  // Pro License Storage Keys
-  const STORAGE_KEY = 'etsy_pod_licensed';
-  const STORAGE_KEY_ALT = 'zoth_etsy_pod_licensed';
-  const STORAGE_KEY_PRO = 'pro_licensed';
-
-  // Initialize Open-Source UI State
-  function checkLicense() {
-    updateLicenseUI();
-  }
-
-  function updateLicenseUI() {
-    const badge = document.getElementById('licenseBadge');
-    if (badge) {
-      badge.innerHTML = '✦ OPEN SOURCE';
-      badge.classList.remove('badge-guest');
-      badge.classList.add('badge-pro');
-    }
-  }
-
   // Profit Calculator
   function calculateProfit(retail, prod) {
     const listingFee = 0.20;
@@ -529,7 +510,6 @@
 
   // Initialize UI Bindings
   function init() {
-    checkLicense();
     updateProfitMeters();
     updateListingView();
     renderLocalCanvas();
@@ -606,9 +586,6 @@
       });
     });
   }
-
-  window.checkLicense = checkLicense;
-  window.updateLicenseUI = updateLicenseUI;
 
   function downloadKit() {
     const cadre = state.cadre;

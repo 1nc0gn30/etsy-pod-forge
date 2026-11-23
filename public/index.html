@@ -36,7 +36,7 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebApplication",
+        "@type": ["WebApplication", "SoftwareApplication"],
         "@id": "https://etsy-pod.nullai.tech/#app",
         "name": "Etsy POD Forge",
         "url": "https://etsy-pod.nullai.tech/",
@@ -195,12 +195,7 @@
       letter-spacing: 0.08em;
       font-weight: 700;
     }
-    .badge-guest {
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
-    }
-    .badge-pro {
+    .badge-open {
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid var(--emerald);
       color: var(--emerald);
@@ -210,7 +205,7 @@
       align-items: center;
       gap: 12px;
     }
-    .btn-key-activate {
+    .btn-coffee-cta {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: var(--text-muted);
@@ -221,101 +216,9 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    .btn-key-activate:hover {
+    .btn-coffee-cta:hover {
       border-color: var(--gold);
       color: var(--gold);
-    }
-
-    /* Sales Funnel Banner Above The Fold */
-    .sales-funnel-banner {
-      margin: 20px 0;
-      background: linear-gradient(135deg, rgba(32, 28, 40, 0.95), rgba(18, 16, 24, 0.95));
-      border: 1px solid var(--gold);
-      border-radius: 14px;
-      padding: 16px 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      position: relative;
-      overflow: hidden;
-    }
-    .sales-banner-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .sales-banner-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .sales-urgency-badge {
-      background: var(--terracotta);
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      text-transform: uppercase;
-    }
-    .sales-headline {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-    .price-strike {
-      text-decoration: line-through;
-      color: var(--text-muted);
-      margin: 0 6px;
-    }
-    .price-highlight {
-      color: var(--gold);
-      font-weight: 800;
-      font-size: 1.25rem;
-    }
-    .sales-banner-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .btn-checkout-stripe {
-      background: linear-gradient(135deg, #635BFF, #7A73FF);
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.15s ease;
-    }
-    .btn-checkout-stripe:hover {
-      transform: translateY(-1px);
-    }
-    .btn-checkout-solana {
-      background: linear-gradient(135deg, #14F195, #9945FF);
-      color: #000;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.15s ease;
-    }
-    .btn-checkout-solana:hover {
-      transform: translateY(-1px);
     }
 
     /* Cadre Selector */
@@ -737,19 +640,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    @media (max-width: 480px) {
-      .sales-banner-content {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .sales-banner-right {
-        width: 100%;
-      }
-      .btn-checkout-stripe, .btn-checkout-solana {
-        flex: 1;
-        justify-content: center;
-      }
-    }
   </style>
   <link rel="stylesheet" href="/wave.css">
   <link rel="stylesheet" href="/wave-states.css">
@@ -774,8 +664,8 @@
         <span class="version-pill" style="font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:9999px;background:rgba(212,175,55,0.15);color:#d4af37;border:1px solid rgba(212,175,55,0.3);margin-left:8px;">v2.5 SOVEREIGN</span>
       </a>
       <div class="header-actions">
-        <div id="licenseBadge" class="brand-badge badge-pro" style="cursor: default;">✦ 100% FREE &amp; OPEN ACCESS</div>
-        <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" class="btn-key-activate" style="text-decoration: none;" id="btnHeaderCoffee">☕ Buy Us a Coffee</a>
+        <div id="openAccessBadge" class="brand-badge badge-open" style="cursor: default;">✦ 100% FREE &amp; OPEN ACCESS</div>
+        <a href="https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X" target="_blank" rel="noopener noreferrer" class="btn-coffee-cta" style="text-decoration: none;" id="btnHeaderCoffee">☕ Buy Us a Coffee</a>
       </div>
     </div>
   </header>

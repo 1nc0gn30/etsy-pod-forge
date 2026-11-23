@@ -22,8 +22,7 @@
 .btn-action-primary:focus-visible,
 .btn-action-secondary:focus-visible,
 .modal-close-btn:focus-visible,
-#btnActivateKey:focus-visible,
-#licenseBadge:focus-visible {
+#btnHeaderCoffee:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
   box-shadow: 0 0 0 1px var(--bg-dark), 0 0 12px rgba(212, 175, 55, 0.45);
@@ -31,8 +30,7 @@
 
 .form-input:focus-visible,
 .title-textarea:focus-visible,
-#inputRetail:focus-visible,
-#license-input:focus-visible {
+#inputRetail:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 0;
   border-color: var(--gold);
