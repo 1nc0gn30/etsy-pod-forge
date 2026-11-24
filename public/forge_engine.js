@@ -170,7 +170,7 @@
         chip.setAttribute('title', 'Click to copy individual tag');
         chip.innerHTML = `<span class="tag-num">${i + 1}</span> ${t} <span class="tag-len">${t.length}c</span>`;
         chip.addEventListener('click', () => {
-          navigator.clipboard.writeText(t);
+          copyTextSafe(t);
           showToast(`Copied tag: "${t}"`);
         });
         elTagContainer.appendChild(chip);
@@ -567,7 +567,7 @@
     // Copy Title Button
     document.getElementById('btnCopyTitle')?.addEventListener('click', () => {
       const title = document.getElementById('listingTitleText')?.value || '';
-      navigator.clipboard.writeText(title);
+      copyTextSafe(title);
       showToast('Copied Title (<140 chars) to clipboard!');
     });
 
@@ -575,7 +575,7 @@
     document.getElementById('btnCopyTags')?.addEventListener('click', () => {
       const spec = CADRE_SPECS[state.cadre];
       const tagsStr = spec.tags.join(', ');
-      navigator.clipboard.writeText(tagsStr);
+      copyTextSafe(tagsStr);
       showToast('Copied all 13 Etsy Tags to clipboard!');
     });
 
@@ -585,6 +585,26 @@
         downloadKit();
       });
     });
+  }
+
+  function copyTextSafe(text) {
+    const fallbackCopy = () => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (_) { /* ignore clipboard fallback errors */ }
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(text).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
   }
 
   function downloadKit() {
