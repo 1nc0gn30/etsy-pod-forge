@@ -1,136 +1,94 @@
-<p align="center">
-  <img src="assets/hero-banner.svg" alt="Etsy POD Forge — Print-on-Demand 300 DPI Canvas Generator, Product Mockup Compositor & Etsy SEO Listing Synthesizer" width="100%" />
-</p>
+# Etsy POD Forge (`v2.6.0`)
 
-# Etsy POD Forge
+![Etsy POD Forge Banner](banner.png)
 
-**Python 3.10+ print-on-demand 300 DPI transparent PNG canvas generator, lifestyle product mockup compositor, 13-tag Etsy SEO listing synthesizer, prompt catalog, and loopback HTTP studio.**
+**Local 300-DPI Print-on-Demand Canvas Generator, Lifestyle Mockup Compositor, 13-Tag Etsy SEO & 2026 Offsite Ads Margin Studio, 53-Recipe Prompt Vault, and 6-Tool Stdio MCP Server.**
 
-- **Zoth Studio v2 Dossier**: [https://zoth.nullai.tech/tools/etsy-pod-forge](https://zoth.nullai.tech/tools/etsy-pod-forge)
-- **Default Loopback Endpoint**: `http://127.0.0.1:8107`
-- **Runtime Dependencies**: `Pillow>=10.0.0` (all HTTP/CLI/ZIP logic uses Python `stdlib`)
-- **License**: MIT (100% free and open-source)
+100% Free & Open-Access · Zero Paywalls · Zero External CDN Egress · Strict Loopback Security (`127.0.0.1:8107`)
 
 ---
 
-## Overview
+## What It Does
 
-`etsy-pod-forge` automates asset and listing preparation for print-on-demand storefronts across apparel (`4500x5400 px @ 300 DPI`), ceramic mugs, canvas totes, and wall art cadres:
+Etsy POD Forge runs a local Python 3 + Pillow workstation (`http://127.0.0.1:8107`) paired with a Zoth Studio v2 God-Mode route (`/tools/etsy-pod-forge`), CLI, Braille TUI, and JSON-RPC 2.0 stdio MCP server:
 
-- **300 DPI Print Canvas Generator**: Renders transparent RGBA PNG print files (`CanvasGenerator`) with custom titles, subtitles, and personalized name arrays.
-- **Lifestyle Mockup Compositor**: Composites generated print artwork onto garment, mug, tote, or frame mockups (`MockupEngine`) with configurable colorways.
-- **Etsy Listing Kit Synthesizer**: Builds<=140-character titles, 13 search tags (`<=20` chars each, zero duplicates), structured descriptions, and fee/margin breakdowns (`listing_synthesizer.py`) with strict invariant validation.
-- **ZIP Asset Bundler & Prompt Catalog**: Packages print PNG, lifestyle JPEG, `listing_details.txt`, and `listing_data.json` into a single downloadable ZIP archive alongside searchable image-generation prompt recipes.
-
----
-
-## Architecture
-
-```text
-src/etsy_pod_forge/
-├── canvas_generator.py     # Pillow RGBA 300 DPI print canvas renderer across POD cadres
-├── mockup_engine.py        # Lifestyle product mockup compositor and colorway renderer
-├── listing_synthesizer.py  # Etsy 140-char title, 13-tag validator & fee/net-margin calculator
-├── prompt_vault.py         # Searchable POD design prompt catalog by cadre and keyword
-├── server.py               # Multi-threaded loopback HTTP API + web studio (127.0.0.1:8107)
-└── cli.py                  # Unified CLI entrypoint (`etsy-pod-forge`)
-```
+- **5 Print-on-Demand Cadres**:
+  - `apparel` — `4500 × 5400 px` @ 300 DPI (`$34.99` retail / `$12.50` base COGS · Printify BP `#638` Provider `#29` · Gelato Heavyweight Crewneck)
+  - `mugs` — `2000 × 2000 px` @ 300 DPI (`$21.99` retail / `$6.80` base COGS · Printify BP `#68` Provider `#26` · Gelato 15oz Ceramic Mug)
+  - `totes` — `3600 × 3600 px` @ 300 DPI (`$24.99` retail / `$7.20` base COGS · Printify BP `#1090` Provider `#3` · Gelato Heavyweight Cotton Tote)
+  - `wall_art` — `4500 × 6000 px` @ 300 DPI (`$29.99` retail / `$8.50` base COGS · Printify BP `#49` Provider `#29` · Gelato 18×24 Archival Matte)
+  - `crafting` — `3600 × 3600 px` @ 300 DPI (`$18.99` retail / `$4.20` base COGS · Printify BP `#554` Provider `#29` · Gelato Spiral Pattern Guide)
+- **Real 300-DPI Canvas & Lifestyle Mockup Engines**: Synthesizes transparent RGBA print canvases (`CanvasGenerator`) and composites them onto 1400×1400 / 1600×1200 lifestyle scenes (`MockupEngine`).
+- **2026 Etsy Fee & Offsite Ads Margin Engine**: Computes `$0.20` listing fee, `6.5%` transaction fee (item + buyer shipping), `3% + $0.25` US payment processing, optional `0%`, `12%` (`>= $10k/yr`), and `15%` (`< $10k/yr`) Offsite Ads tiers, net profit, margin %, ROI %, and exact break-even price.
+- **140-Char Title & 13-Tag Synthesizer + Master ZIP Export**: Generates compliant Etsy listing metadata and bundles `{cadre}_print_canvas.png`, `{cadre}_lifestyle_mockup.jpg`, `listing_details.txt`, and `listing_data.json` via both `POST` and `GET /api/export-kit`.
+- **53-Recipe Curated Prompt Vault**: Filterable by cadre and keyword across Midjourney v6.1 / Flux.1 specifications.
+- **Dual-Theme Workstation UI**: Full Editorial Ivory Light Mode and Obsidian Gold Dark Mode (`?theme=light|dark&embed=1`, toggle button, `prefers-color-scheme`) with zero Google Fonts or external CDN requests.
 
 ---
 
-## Quickstart
+## How It Works
 
-```bash
-git clone https://github.com/1nc0gn30/etsy-pod-forge.git
-cd etsy-pod-forge
-python3 -m pip install -e .
-
-# Launch the loopback web studio on http://127.0.0.1:8107
-python3 server.py --host 127.0.0.1 --port 8107
-```
-
-Or launch via the CLI entrypoint:
-
-```bash
-etsy-pod-forge serve --host 127.0.0.1 --port 8107
-```
+1. **Hardened Loopback HTTP Server (`src/etsy_pod_forge/server.py`)**:
+   - Binds strictly to `127.0.0.1:8107` by default.
+   - Enforces loopback `Host` header validation (`403 Forbidden`), exact-port `Origin` CORS allowlist (`127.0.0.1:<port>`, `localhost:<port>`, `[::1]:<port>`, `:3000`; rejects spoofed `:81070` and external origins with `403` + `Vary: Origin`), all 4 security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Content-Security-Policy`), `1 MiB` request body ceiling (`413`), strict JSON/type validation (`400`), disabled directory listings (`403`), and whitelisted `cadre` keys preventing Zip-Slip / header injection.
+   - Zero unsolicited background network calls.
+2. **REST API Endpoints (`http://127.0.0.1:8107`)**:
+   - `GET / HEAD /health`, `/api/health`, `/api/stats`, `/api/cadres`, `/api/prompts`, `/api/mcp/tools`
+   - `POST /api/generate-canvas`, `POST /api/generate-mockup`, `POST /api/generate-listing`, `POST /api/calculate-margins`
+   - `GET / POST /api/export-kit`
 
 ---
 
-## CLI Usage
+## ZothOS CLI, Braille TUI & 6-Tool Stdio MCP Commands
 
 ```bash
-# View CLI help
-etsy-pod-forge --help
-
-# Generate a print-ready 300 DPI PNG canvas (or --preview for quick inspection)
-etsy-pod-forge generate --cadre apparel --title "Grandma's Garden" --names "Emma,Liam,Olivia" --out apparel_canvas.png
-
-# Composite artwork onto a lifestyle product mockup
-etsy-pod-forge mockup --cadre apparel --color sand --out apparel_mockup.jpg
-
-# Synthesize an Etsy SEO listing kit with invariant validation and JSON output
-etsy-pod-forge listing --cadre apparel --retail 34.99 --cost 12.50 --json
-
-# Search or filter the prompt recipe catalog
-etsy-pod-forge prompts --cadre apparel --limit 5
-etsy-pod-forge prompts --search botanical
-
-# Query live server telemetry on port 8107
-etsy-pod-forge status --port 8107
-```
-
-### ZothOS v3.4.0 CLI Integration
-
-On ZothOS v3.4.0 workstations, `etsy-pod-forge` and `etsy-pod-forge-tui` are installed in `/usr/local/bin/`:
-
-```bash
-etsy-pod-forge listing --cadre apparel --json
-etsy-pod-forge-tui --json
+# Start hardened local workstation on 127.0.0.1:8107
 etsy-pod-forge serve --port 8107
+
+# Check daemon & local engine status
+etsy-pod-forge --status
+etsy-pod-forge --json
+
+# Synthesize compliant Etsy listing JSON (pure JSON stdout)
+etsy-pod-forge listing --cadre apparel --title "Grandma's Garden" --offsite-ads-rate 0.12 --json
+
+# Generate 300-DPI RGBA canvas and lifestyle mockup
+etsy-pod-forge generate --cadre apparel --preview --out apparel_canvas.png
+etsy-pod-forge mockup --cadre mugs --color white --out mug_mockup.jpg
+
+# Browse the 53-recipe Prompt Vault
+etsy-pod-forge prompts --cadre wall_art --limit 5
+
+# Launch the Unicode U+2800 Braille TUI telemetry snapshot
+etsy-pod-forge-tui --once
+etsy-pod-forge-tui --once --json
+
+# Launch the JSON-RPC 2.0 stdio MCP server
+etsy-pod-forge mcp
+# Or via Python module:
+python3 -m etsy_pod_forge.cli mcp
 ```
 
----
-
-## HTTP API Reference
-
-When running on `http://127.0.0.1:8107`:
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/health`, `/api/health` | Service health status, port, version, and uptime |
-| `GET` | `/api/stats` | Render, mockup, listing, and export counters |
-| `GET` | `/api/cadres` | Supported POD product cadres and print specifications |
-| `GET` | `/api/prompts` | Prompt catalog (`?cadre=...` or `?q=...`) |
-| `POST` | `/api/generate-canvas` | Render base64 PNG print canvas (`cadre`, `preview`, `title`, `subtitle`, `names`) |
-| `POST` | `/api/generate-mockup` | Composite base64 JPEG lifestyle mockup (`cadre`, `color`, `title`, `names`) |
-| `POST` | `/api/generate-listing` | Synthesize Etsy title, 13 tags, description, fees, and invariant check |
-| `POST` | `/api/export-kit` | Download a `.zip` bundle with print PNG, mockup JPEG, text, and JSON kit |
+### Registered MCP Tools (`6`)
+1. `pod_list_cadres` — 5 POD cadres, 300-DPI dimensions, default pricing, Printify blueprint/provider IDs, Gelato v4 UIDs
+2. `pod_generate_canvas` — 300-DPI RGBA print-ready PNG metadata + base64 preview
+3. `pod_generate_mockup` — 1400×1400 / 1600×1200 lifestyle mockup JPEG + base64 preview
+4. `pod_synthesize_listing` — 140-char title, 13 unique `<= 20`-char tags, SEO score, description, and 2026 margin math
+5. `pod_calculate_margins` — Exact 2026 Etsy fees (`0%` / `12%` / `15%` Offsite Ads), shipping, net profit, ROI %, break-even price
+6. `pod_search_prompts` — Search/filter the 53-recipe curated Prompt Vault by cadre and keyword
 
 ---
 
-## Testing & Verification
+## Running Tests
 
 ```bash
-# Run the pytest suite
-PYTHONPATH=src python3 -m pytest -q
-
-# Or run via CLI subcommand
-etsy-pod-forge test
-
-# Scan repository with gitleaks
-gitleaks detect --source . --no-banner --redact
+PYTHONPATH=src pytest -q tests/
 ```
 
 ---
 
-## Support
+## Support & Attribution
 
-Etsy POD Forge is 100% free, open-access, and unlocked software with zero paywalls. Optional community support is available via:
-
-- **Stripe**: [☕ Buy Us a Coffee](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X)
-- **Solana Tip**: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK` (`solana:GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`)
-
-## License
-
-MIT License — Engineered by Neal Frazier Tech ([`@1nc0gn30`](https://github.com/1nc0gn30)) • [NullAI Platform](https://nullai.tech). See [LICENSE](LICENSE) for full text.
+- **100% Free & Open-Access** — Zero paywalls or license locks.
+- Optional support: [Buy Us a Coffee (Stripe)](https://buy.stripe.com/3cIfZg27PdKo2D64Ocfw40X) · Solana Tip: `GG2eQbVh8ut1BK6j1A2tz7pSySdLpD38BgyEhGcxdXoK`
+- **Engineered by Neal Frazier Tech (@1nc0gn30) • NullAI Platform** · [GitHub](https://github.com/1nc0gn30/etsy-pod-forge) · [nullai.tech](https://nullai.tech)
